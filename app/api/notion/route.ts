@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
       
       // Delete existing blocks (except the title)
       for (const block of currentBlocks.results) {
-        if (block.type !== 'child_page') {
+        if ('type' in block && 'id' in block && block.type !== 'child_page') {
           await notion.blocks.delete({ block_id: block.id });
         }
       }
